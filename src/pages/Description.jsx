@@ -15,7 +15,7 @@ const Description = () => {
 useEffect(() => {
   const fetchProduct = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/seller/products/${id}/`);
+      const response = await fetch(`https://ecom-new-4bgv.onrender.com/seller/products/${id}/`);
       if (!response.ok) throw new Error('Failed to fetch product');
       const data = await response.json();
       setProduct(data);
@@ -36,7 +36,7 @@ useEffect(() => {
       const cleanedImages = product.image
         .map((path) => path.trim())
         .filter((path) => path.length > 0)
-        .map((path) => `http://localhost:8000${path.replace(/\\/g, "/")}`);
+        .map((path) => `https://ecom-new-4bgv.onrender.com${path.replace(/\\/g, "/")}`);
       setImageArray(cleanedImages);
       setCurrentImageIndex(0);
     }

@@ -83,7 +83,7 @@ const goToDetails = () => {
         {item.image.map((img, i) => (
           <img
             key={i}
-            src={`http://localhost:8000${img.replace(/\\/g, "/")}`}
+src={`https://ecom-new-4bgv.onrender.com${img.replace(/\\/g, "/")}`}
             alt={item.name}
             className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
               i === currentImageIndex ? "opacity-100" : "opacity-0"
