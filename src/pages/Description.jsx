@@ -31,16 +31,12 @@ useEffect(() => {
 
 
   // Clean image paths
-  useEffect(() => {
-    if (product?.image) {
-      const cleanedImages = product.image
-        .map((path) => path.trim())
-        .filter((path) => path.length > 0)
-        .map((path) => `https://ecom-new-4bgv.onrender.com${path.replace(/\\/g, "/")}`);
-      setImageArray(cleanedImages);
-      setCurrentImageIndex(0);
-    }
-  }, [product]);
+ useEffect(() => {
+  if (product?.image) {
+    setImageArray(product.image); // Use Cloudinary URLs directly
+    setCurrentImageIndex(0);
+  }
+}, [product]);
 
   // Image navigation
   const nextImage = () => {
