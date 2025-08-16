@@ -39,7 +39,7 @@ export default function Register() {
     setEmail(formData.email);
 
     try {
-      const res = await fetch("http://localhost:8000/signup", {
+      const res = await fetch("https://ecom-new-4bgv.onrender.com/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -50,7 +50,7 @@ export default function Register() {
         throw new Error(err.detail);
       }
 
-      const otpRes = await fetch(`http://localhost:8000/send-otp?email=${formData.email}`, {
+      const otpRes = await fetch(`https://ecom-new-4bgv.onrender.comsend-otp?email=${formData.email}`, {
         method: "POST",
       });
 
@@ -74,7 +74,7 @@ export default function Register() {
     e.preventDefault();
 
     try {
-      const response = await axios.post(`http://localhost:8000/verify-otp?email=${email}&otp=${otp}`);
+      const response = await axios.post(`https://ecom-new-4bgv.onrender.com/verify-otp?email=${email}&otp=${otp}`);
       const data = response.data;
 
       if (response.status === 200) {

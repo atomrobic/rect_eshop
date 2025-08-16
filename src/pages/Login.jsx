@@ -36,7 +36,7 @@ const Login = () => {
     try {
       if (!showOtp) {
         // Step 1: Send email + password to backend
-        const res = await fetch("http://localhost:8000/login", {
+        const res = await fetch("https://ecom-new-4bgv.onrender.com/login", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -51,7 +51,7 @@ const Login = () => {
         }
 
         // Step 2: If login success, request OTP
-        await fetch(`http://localhost:8000/send-otp?email=${data.email}`, {
+        await fetch(`https://ecom-new-4bgv.onrender.com/send-otp?email=${data.email}`, {
           method: "POST",
         });
 
@@ -60,7 +60,7 @@ const Login = () => {
         // Step 3: Verify OTP
         const { email, otp } = getValues();
         const res = await fetch(
-          `http://localhost:8000/verify-otp?email=${email}&otp=${otp}`,
+          `https://ecom-new-4bgv.onrender.comverify-otp?email=${email}&otp=${otp}`,
           {
             method: "POST",
           }
