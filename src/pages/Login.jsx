@@ -60,7 +60,7 @@ const Login = () => {
         // Step 3: Verify OTP
         const { email, otp } = getValues();
         const res = await fetch(
-          `https://ecom-new-4bgv.onrender.comverify-otp?email=${email}&otp=${otp}`,
+          `https://ecom-new-4bgv.onrender.com/verify-otp?email=${email}&otp=${otp}`,
           {
             method: "POST",
           }
