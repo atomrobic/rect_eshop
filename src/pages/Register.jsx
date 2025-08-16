@@ -50,7 +50,7 @@ export default function Register() {
         throw new Error(err.detail);
       }
 
-      const otpRes = await fetch(`https://ecom-new-4bgv.onrender.comsend-otp?email=${formData.email}`, {
+      const otpRes = await fetch(`https://ecom-new-4bgv.onrender.com/send-otp?email=${formData.email}`, {
         method: "POST",
       });
 
