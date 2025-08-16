@@ -83,7 +83,7 @@ const goToDetails = () => {
         {item.image.map((img, i) => (
           <img
             key={i}
-src={`https://ecom-new-4bgv.onrender.com${img.replace(/\\/g, "/")}`}
+            src={img}   // Use the Cloudinary URL directly
             alt={item.name}
             className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
               i === currentImageIndex ? "opacity-100" : "opacity-0"
