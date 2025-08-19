@@ -1,62 +1,35 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-// import useProductStore from "./product_data";
-import useProductStore from "./product_data/product"; // ✅ FIXED import
-
-import Header from "./Header";
-import MobileMenu from "./Mobilemenu";
+import React, { useEffect, useState } from "react";
+import Navbar from "./navbar";
 import HeroSection from "./Herosection";
 import ProductGrid from "./ProductGrid";
+import useProductStore from "./product_data/product"; // ✅ default export
 
-const StyleHub = () => {
-  const { products, fetchProducts, toggleWishlist, wishlist, setSelectedProduct } = useProductStore();
+const BlackEcommerce = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeCategory, setActiveCategory] = useState("All");
-  const navigate = useNavigate();
 
-  const categories = ["All", "Men", "Women", "Kids", "Accessories"];
+  // Destructure from your store
+  const { products, wishlist, fetchProducts, toggleWishlist } = useProductStore();
 
+  // Fetch products when component mounts
   useEffect(() => {
     fetchProducts();
   }, [fetchProducts]);
 
-  const isInWishlist = (product) => wishlist.some((item) => item.id === product.id);
-  const setSelectedProductAndNavigate = (product) => {
-    setSelectedProduct(product);
-    navigate(`/products/${product.id}`);
-  };
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
-      <Header
-        categories={categories}
-        activeCategory={activeCategory}
-        setActiveCategory={setActiveCategory}
-        wishlist={wishlist}
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black">
+      <Navbar
         mobileMenuOpen={mobileMenuOpen}
         setMobileMenuOpen={setMobileMenuOpen}
+        wishlistCount={wishlist.length}
       />
-      {mobileMenuOpen && (
-        <MobileMenu
-          categories={categories}
-          activeCategory={activeCategory}
-          setActiveCategory={setActiveCategory}
-          wishlist={wishlist}
-          setMobileMenuOpen={setMobileMenuOpen}
-        />
-      )}
       <HeroSection />
-      <main className="max-w-6xl mx-auto px-4 py-8">
-        <ProductGrid
-          products={products}
-          toggleWishlist={toggleWishlist}
-          isInWishlist={isInWishlist}
-          setSelectedProductAndNavigate={setSelectedProductAndNavigate}
-        />
-      </main>
-      {/* <Footer /> */}
+      <ProductGrid
+        products={products}           // products from Zustand
+        wishlist={wishlist}           // wishlist from Zustand
+        onWishlistToggle={toggleWishlist} // toggleWishlist function
+      />
     </div>
   );
 };
 
-export default StyleHub;
+export default BlackEcommerce;
