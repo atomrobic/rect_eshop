@@ -7,7 +7,7 @@ const useProductStore = create((set) => ({
 
   fetchProducts: async ({ sortBy = "featured", categoryId = "" } = {}) => {
     try {
-      let url = `http://127.0.0.1:8000/seller/products?sort_by=${sortBy}`;
+      let url = `https://ecom-new-4bgv.onrender.com/products?sort_by=${sortBy}`;
       if (categoryId) url += `&category_id=${categoryId}`;
 
       const response = await axios.get(url);
