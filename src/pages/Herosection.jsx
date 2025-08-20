@@ -1,36 +1,43 @@
 import React, { useState, useEffect } from "react";
-
-const images = [
-  "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1600&h=900&fit=crop",
-  "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1600&h=900&fit=crop",
-  "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=1600&h=900&fit=crop",
-];
+import axios from "axios";
 
 const HeroSection = () => {
+  const [banners, setBanners] = useState([]);
   const [currentImage, setCurrentImage] = useState(0);
+
+  // Fetch banners from API
+  useEffect(() => {
+    axios
+      .get("http://127.0.0.1:8000/banners/?skip=0&limit=10")
+      .then((res) => {
+        setBanners(res.data);
+      })
+      .catch((err) => console.error("Failed to fetch banners:", err));
+  }, []);
 
   // Auto-slide effect
   useEffect(() => {
+    if (banners.length === 0) return;
     const interval = setInterval(() => {
-      setCurrentImage((prev) => (prev + 1) % images.length);
-    }, 5000); // Change image every 5 seconds
+      setCurrentImage((prev) => (prev + 1) % banners.length);
+    }, 5000); // Change every 5s
     return () => clearInterval(interval);
-  }, []);
+  }, [banners]);
 
   return (
     <div className="relative text-white overflow-hidden h-[400px] md:h-[500px]">
       {/* Carousel Background */}
-      {images.map((img, index) => (
+      {banners.map((banner, index) => (
         <div
-          key={index}
+          key={banner.id}
           className={`absolute inset-0 w-full h-full bg-cover bg-center transition-opacity duration-1000 ${
             index === currentImage ? "opacity-30" : "opacity-0"
           }`}
-          style={{ backgroundImage: `url(${img})` }}
+          style={{ backgroundImage: `url(${banner.image_url})` }}
         />
       ))}
 
-      {/* Overlay for darker effect */}
+      {/* Overlay */}
       <div className="absolute inset-0 bg-black/40"></div>
 
       {/* Content */}
