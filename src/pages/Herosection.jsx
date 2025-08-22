@@ -8,7 +8,7 @@ const HeroSection = () => {
   // Fetch banners from API
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8000/banners/?skip=0&limit=10")
+      .get("https://ecom-new-4bgv.onrender.com/banners/?skip=0&limit=10")
       .then((res) => {
         setBanners(res.data);
       })
